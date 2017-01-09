@@ -1,0 +1,8 @@
+optOut: false
+lastUpdateCheck: 1404999268597
+update:
+  latest: 0.8.3
+  current: 0.7.0
+  type: minor
+  date: "2014-07-03T19:00:11.354Z"
+  name: generator-karma

@@ -1,0 +1,7 @@
+optOut: false
+lastUpdateCheck: 1439298754935
+update:
+  latest: 0.7.25
+  current: 0.7.20
+  type: patch
+  name: json-server

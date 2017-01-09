@@ -1,0 +1,8 @@
+- cmd: function fish_prompt.fish\n:q\nend
+   when: 1451635889
+   paths:
+    - fish_prompt.fish
+- cmd: khalil
+   when: 1457960487
+- cmd: 12
+   when: 1457965340

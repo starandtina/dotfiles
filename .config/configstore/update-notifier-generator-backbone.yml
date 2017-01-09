@@ -1,0 +1,8 @@
+optOut: false
+lastUpdateCheck: 1404999268579
+update:
+  latest: 0.3.0
+  current: 0.2.8
+  type: minor
+  date: "2014-06-24T18:18:50.219Z"
+  name: generator-backbone

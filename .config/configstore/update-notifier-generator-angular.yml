@@ -1,0 +1,8 @@
+optOut: false
+lastUpdateCheck: 1404999268569
+update:
+  latest: 0.9.3
+  current: 0.8.0
+  type: minor
+  date: "2014-07-08T17:26:38.945Z"
+  name: generator-angular

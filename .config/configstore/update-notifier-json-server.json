@@ -1,0 +1,10 @@
+{
+	"optOut": false,
+	"lastUpdateCheck": 1459581137136,
+	"update": {
+		"latest": "0.8.9",
+		"current": "0.8.3",
+		"type": "patch",
+		"name": "json-server"
+	}
+}
