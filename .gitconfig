@@ -1,37 +1,85 @@
 [user]
-	name = starandtina
-	email = kandmforever@126.com
-	signingkey = 055B8BAD
-[push]
-	default = simple
+  name = Khalil Zhang
+  email = khalil.zhang@activenetwork.com
+
 [alias]
-    dsf = "!f() { [ \"$GIT_PREFIX\" != \"\" ] && cd "$GIT_PREFIX"; git diff --color $@ | diff-so-fancy | less --tabs=4 -RFX; }; f"
-    clean-tags=for-each-ref --format="%(refname:short)" refs/tags/* | xargs git tag -d && git fetch --tags
-    st = status -sb
-    ci = commit -m
-    br = branch
-    df = diff
-    lg = log -pgit ps
-    co = checkout
-    fu = fetch upstream
-    tree = log --graph --pretty=oneline --decorate
-    pom = pull origin master
-    ps = push
-    pst = push --tags
-    pl = pull
-    pp = !"echo 'Pull'; git pull; echo 'Push'; git push"
-    amend = commit --amend -C HEAD
-    ll   = log --pretty=oneline --decorate --abbrev-commit --max-count=30
-    lll  = log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
-    rn = log -M
-    short = shortlog -s -n
-    # Displays active users in the repository in the past 6 months
-    active = shortlog --numbered --summary --email --no-merges --since="6 months"
+  prune = fetch --prune
+  # Because I constantly forget how to do this
+  # https://git-scm.com/docs/git-fetch#git-fetch--p
+
+  undo = reset --soft HEAD^
+  # Not quite as common as an amend, but still common
+  # https://git-scm.com/docs/git-reset#git-reset-emgitresetemltmodegtltcommitgt
+
+  stash-all = stash save --include-untracked
+  # We wanna grab those pesky un-added files!
+  # https://git-scm.com/docs/git-stash
+
+  glog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+  # No need for a GUI - a nice, colorful, graphical representation
+  # https://git-scm.com/docs/git-log
+  # via https://medium.com/@payload.dd/thanks-for-the-git-st-i-will-use-this-4da5839a21a4
+
+  dsf = "!f() { [ \"$GIT_PREFIX\" != \"\" ] && cd "$GIT_PREFIX"; git diff --color $@ | diff-so-fancy | less --tabs=4 -RFX; }; f"
+  clean-tags=for-each-ref --format="%(refname:short)" refs/tags/* | xargs git tag -d && git fetch --tags
+  st = status -sb
+  ci = commit -m
+  br = branch
+  df = diff
+  lg = log -pgit ps
+  co = checkout
+  fu = fetch upstream
+  tree = log --graph --pretty=oneline --decorate
+  pom = pull origin master
+  ps = push
+  pst = push --tags
+  pl = pull
+  pp = !"echo 'Pull'; git pull; echo 'Push'; git push"
+  amend = commit --amend -C HEAD
+  ll   = log --pretty=oneline --decorate --abbrev-commit --max-count=15
+  lll  = log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+  rn = log -M
+  short = shortlog -s -n
+  # Displays active users in the repository in the past 6 months
+  active = shortlog --numbered --summary --email --no-merges --since="6 months"
+  serve = daemon --verbose --export-all --enable=receive-pack --base-path=.git --reuseaddr --strict-paths .git/
+
+[merge]
+  conflictstyle = diff3
+  # Standard diff is two sets of final changes. This introduces the original text before each side's changes.
+  # https://git-scm.com/docs/git-config#git-config-mergeconflictStyle
+
+[push]
+  default = simple
+  # "push the current branch back to the branch whose changes are usually integrated into the current branch"
+  # "refuse to push if the upstream branch’s name is different from the local one"
+  # https://git-scm.com/docs/git-config#git-config-pushdefaul
+
+  followTags = true
+  # Because I get sick of telling git to do it manually
+  # https://git-scm.com/docs/git-config#git-config-pushfollowTags
+
+[status]
+  showUntrackedFiles = all
+  # Sometimes a newly-added folder, since it's only one line in git status, can slip under the radar.
+  # https://git-scm.com/docs/git-config#git-config-statusshowUntrackedFiles
+
+[transfer]
+  fsckobjects = true
+  # To combat repository corruption!
+  # Note: this global option applies during receive and transmit
+  # https://git-scm.com/docs/git-config#git-config-transferfsckObjects
+  # via https://groups.google.com/forum/#!topic/binary-transparency/f-BI4o8HZW0
+
+[filter "media"]
+    required = true
+    clean = git media clean %f
+    smudge = git media smudge %f
+
 [filter "lfs"]
-	clean = git-lfs clean %f
-	smudge = git-lfs smudge %f
-	required = true
-[commit]
-	gpgsign = false
-[init]
-	templatedir = /Users/zx/.git-templates
+  clean = git-lfs clean %f
+  smudge = git-lfs smudge %f
+  required = true
+
+[core]
+  ignorecase = false
