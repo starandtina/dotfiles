@@ -1,8 +1,25 @@
-[user]
-  name = Khalil Zhang
-  email = khalil.zhang@activenetwork.com
-
+[core]
+	pager = diff-so-fancy | less --tabs=4 -RFX
+[interactive]
+	diffFilter = diff-so-fancy --patch
+[color]
+	ui = true
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[color "diff"]
+	meta = 11
+	frag = magenta bold
+	func = 146 bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
 [alias]
+	dsf = diff --color
+	patch = !git --no-pager diff --no-color
   prune = fetch --prune
   # Because I constantly forget how to do this
   # https://git-scm.com/docs/git-fetch#git-fetch--p
@@ -20,7 +37,7 @@
   # https://git-scm.com/docs/git-log
   # via https://medium.com/@payload.dd/thanks-for-the-git-st-i-will-use-this-4da5839a21a4
 
-  dsf = "!f() { [ \"$GIT_PREFIX\" != \"\" ] && cd "$GIT_PREFIX"; git diff --color $@ | diff-so-fancy | less --tabs=4 -RFX; }; f"
+  # dsf = "!f() { [ \"$GIT_PREFIX\" != \"\" ] && cd "$GIT_PREFIX"; git diff --color $@ | diff-so-fancy | less --tabs=4 -RFX; }; f"
   clean-tags=for-each-ref --format="%(refname:short)" refs/tags/* | xargs git tag -d && git fetch --tags
   st = status -sb
   ci = commit -m
@@ -43,43 +60,10 @@
   # Displays active users in the repository in the past 6 months
   active = shortlog --numbered --summary --email --no-merges --since="6 months"
   serve = daemon --verbose --export-all --enable=receive-pack --base-path=.git --reuseaddr --strict-paths .git/
-
-[merge]
-  conflictstyle = diff3
-  # Standard diff is two sets of final changes. This introduces the original text before each side's changes.
-  # https://git-scm.com/docs/git-config#git-config-mergeconflictStyle
-
-[push]
-  default = simple
-  # "push the current branch back to the branch whose changes are usually integrated into the current branch"
-  # "refuse to push if the upstream branch’s name is different from the local one"
-  # https://git-scm.com/docs/git-config#git-config-pushdefaul
-
-  followTags = true
-  # Because I get sick of telling git to do it manually
-  # https://git-scm.com/docs/git-config#git-config-pushfollowTags
-
-[status]
-  showUntrackedFiles = all
-  # Sometimes a newly-added folder, since it's only one line in git status, can slip under the radar.
-  # https://git-scm.com/docs/git-config#git-config-statusshowUntrackedFiles
-
-[transfer]
-  fsckobjects = true
-  # To combat repository corruption!
-  # Note: this global option applies during receive and transmit
-  # https://git-scm.com/docs/git-config#git-config-transferfsckObjects
-  # via https://groups.google.com/forum/#!topic/binary-transparency/f-BI4o8HZW0
-
-[filter "media"]
-    required = true
-    clean = git media clean %f
-    smudge = git media smudge %f
-
-[filter "lfs"]
-  clean = git-lfs clean %f
-  smudge = git-lfs smudge %f
-  required = true
-
-[core]
-  ignorecase = false
+[pager]
+	dsf = diff-so-fancy | less --tabs=4 -RFXS
+[pull]
+	rebase = true
+[user]
+	name = starandtina
+	email = kandmforever@126.com
